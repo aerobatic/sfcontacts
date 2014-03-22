@@ -1,0 +1,8 @@
+<div>
+  <h1>Index List</h1>
+  <ul>
+    <li ng-repeat="thing in things"> 
+      <a href="#" ng-click="loadThing(thing.id, $event)">{{thing.name}}</a>
+    </li>
+  </ul>
+</div>

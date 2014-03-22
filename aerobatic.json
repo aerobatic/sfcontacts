@@ -1,0 +1,15 @@
+{
+  "shim": {
+    "angular": {
+      "exports": "angular"
+    },
+    "angular-route": {
+      "deps": ["angular"]
+    }
+  },
+  "paths": {
+    "angular": ["//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min"],
+    "angular-route": ["//ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min"]
+  },
+  "mainModule": "js/app"
+}
