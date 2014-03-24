@@ -1,5 +1,9 @@
 
+body {
+  font: 14px Helvetica, arial, freesans, clean, sans-serif;
+  padding: 20px;
+}
+
 h1, h2, h3, h4, h5 {
-  font-family: "Helevetica",
-  font-weight: 500
+  font-weight: 500;
 }

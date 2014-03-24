@@ -1,22 +1,20 @@
+define(['angular', 'aerobatic'], function(angular, aerobatic) {
+  var module = angular.module('aerobatic', []);
 
+  module.factory('aerobatic', [function() {
+    return aerobatic;
+  }]);
 
-define(['require', 'angular'], function(require, angular) {
-
-  var module = angular.module('aeroExtensions', []);
-
-  module.directive('aeroAssetUrl', function () {
+  module.directive('assetUrl', function (aerobatic) {
     'use strict';
-
-    var config = require.config;
 
     return {
       priority: 99, // it needs to run after the attributes are interpolated
       restrict: 'A',
       link: function(scope, element, attr) {
-        // attr.aero-asset-url
-
-        // attr.$set()        
+        // Set the href attribute to the assetUrl.
+        attr.$set("href", aerobatic.assetUrl(attr.assetUrl));
       }
     };
-  }); 
+  });
 });
