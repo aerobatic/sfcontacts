@@ -5,7 +5,7 @@ define(['angular', 'aerobatic'], function(angular, aerobatic) {
     return aerobatic;
   }]);
 
-  module.directive('assetUrl', function (aerobatic) {
+  module.directive('assetUrl', ['aerobatic', function (aerobatic) {
     'use strict';
 
     return {
@@ -16,5 +16,5 @@ define(['angular', 'aerobatic'], function(angular, aerobatic) {
         attr.$set("href", aerobatic.assetUrl(attr.assetUrl));
       }
     };
-  });
+  }]);
 });
