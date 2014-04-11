@@ -3,7 +3,14 @@
  *
  * @type {angular.Module}
  */
-define(['angular', 'angular-route', 'asset!js/aerobatic-angular', 'asset!js/services/thing'], function(angular) {
+define([
+  'angular',
+  'angular-route',
+  'asset!js/aerobatic-angular',
+  'asset!js/services/thing',
+  'css!css/normalize',
+  'css!css/app'
+  ], function(angular) {
   'use strict';
 
   var app = angular.module('angular-seed', ['ngRoute', 'seedServices', 'aerobatic']);
