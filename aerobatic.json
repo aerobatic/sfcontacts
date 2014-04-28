@@ -5,11 +5,16 @@
     },
     "angular-route": {
       "deps": ["angular"]
+    },
+    "angular-mocks": {
+      "deps": ["angular"],
+      "exports":"angular.mock"
     }
   },
   "paths": {
     "angular": ["//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min"],
-    "angular-route": ["//ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min"]
+    "angular-route": ["//ajax.googleapis.com/ajax/libs/angularjs/1.2.5/angular-route.min"],
+    "angular-mocks": ["//code.angularjs.org/1.2.3/angular-mocks"]
   },
   "mainModule": "js/app"
 }
