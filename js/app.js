@@ -6,7 +6,7 @@
 define([
   'angular',
   'angular-route',
-  'asset!js/aerobatic-angular',
+  'angular-aerobatic'
   'asset!js/services/thing',
   'css!css/normalize',
   'css!css/app'
