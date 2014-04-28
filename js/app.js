@@ -6,16 +6,16 @@
 define([
   'angular',
   'angular-route',
-  'angular-aerobatic'
-  'asset!js/services/thing',
   'css!css/normalize',
   'css!css/app'
   ], function(angular) {
   'use strict';
 
+  // We need to require these after we are assured that angular is available
+  require(['angular-aerobatic', 'asset!js/services/thing']);
+
   var app = angular.module('angular-seed', ['ngRoute', 'seedServices', 'aerobatic']);
 
-  // Declare all the top level dependencies our app requires
   var dependencies = [
     'asset!partials/layout',
     'asset!js/controllers/indexCtrl',
