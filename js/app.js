@@ -3,7 +3,7 @@
  *
  * @type {angular.Module}
  */
-define([
+require([
   'angular',
   'angular-route',
   'css!css/normalize',
@@ -11,36 +11,41 @@ define([
   ], function(angular) {
   'use strict';
 
-  // We need to require these after we are assured that angular is available
-  require(['angular-aerobatic', 'asset!js/services/thing']);
+  define("angular-seed-app", function(require) {
+    // The string arguments to the require function call must be
+    // string literals, not JavaScript expressions.
+    var views = {
+      index: {
+        controller: require('asset!js/controllers/indexCtrl'),
+        template: require('asset!partials/index')
+      },
+      detail: {
+        controller: require('asset!js/controllers/detailCtrl'),
+        template: require('asset!partials/detail')
+      }
+    };
 
-  var app = angular.module('angular-seed', ['ngRoute', 'seedServices', 'aerobatic']);
+    // The aerobatic service is a built-in Angular service.
+    var app = angular.module('angular-seed', ['ngRoute', 'seedServices', 'aerobatic']);
 
-  var dependencies = [
-    'asset!partials/layout',
-    'asset!js/controllers/indexCtrl',
-    'asset!partials/index',
-    'asset!js/controllers/detailCtrl',
-    'asset!partials/detail'
-  ];
-
-  require(dependencies, function(layout, indexCtrl, indexView, detailCtrl, detailView) {
     app.config(['$routeProvider', function ($routeProvider) {
-      $routeProvider.when('/', {
-        controller: indexCtrl,
-        template: indexView
-      }).when('/:id', {
-        controller: detailCtrl,
-        template: detailView
-      }).otherwise({
-        redirectTo: '/'
-      });
+      $routeProvider
+        .when('/', views.index)
+        .when('/:id', views.detail)
+        .otherwise({redirectTo: '/'});
     }]);
 
     angular.element(document).ready(function() {
       // Append an ng-view to the body to load our partial views into
-      angular.element(document.body).append(angular.element(layout));
+      angular.element(document.body).append(angular.element(require('asset!partials/layout')));
       angular.bootstrap(document, ['angular-seed']);
     });
+
+    return app;
   });
+
+  // We need to require these after we are assured that angular is available
+  // angular-aerobatic is a module built-in to Aerobatic that registers
+  // the aerobatic Angular service.
+  require(['angular-aerobatic', 'asset!js/services/thing', 'angular-seed-app']);
 });
