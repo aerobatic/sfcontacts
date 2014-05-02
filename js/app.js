@@ -35,6 +35,10 @@ require([
         .otherwise({redirectTo: '/'});
     }]);
 
+    app.run(['$log', function($log) {
+      $log.info("Angular run event");
+    }]);
+
     angular.element(document).ready(function() {
       // Append an ng-view to the body to load our partial views into
       angular.element(document.body).append(angular.element(require('asset!partials/layout')));
