@@ -1,7 +1,7 @@
 <div>
   <div>
-    <a href="#" ng-click="location.path('/')">Back</a>
+    <a href="#!/">Back to Index</a>
   </div>
   <h1>{{thing.name}}</div>
-  <img class="thing-img" asset-src='images/{{thing.name.toLowerCase()}}' />
+  <img class="thing-img" ng-src='{{thingImage(thing)}}' />
 </div>

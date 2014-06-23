@@ -8,7 +8,7 @@ define(['angular', 'angular-mocks', 'asset!js/controllers/detailCtrl'], function
         find: function(id) {
           return {id: id};
         }
-      }
+      };
 		});
 
 		it('should have a properly working DetailCtrl', function() {
