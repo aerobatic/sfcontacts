@@ -58,7 +58,7 @@ module.exports = function(grunt) {
     clean: ['tmp'],
     aerobatic: {
       deploy: {
-        src: ['index.html', 'login.html', 'dist/*.*', 'favicons/*'],
+        src: ['index.html', 'login.html', 'dist/*.*', 'favicons/*', 'partials/*.html'],
       },
       sim: {
         index: 'index.html',
