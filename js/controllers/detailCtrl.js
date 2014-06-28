@@ -1,12 +1,12 @@
 
 
-angular.module('seedControllers').controller('DetailCtrl', function($scope, $routeParams, $window, Thing) {
+angular.module('controllers').controller('DetailCtrl', function($scope, $routeParams, $window, aerobatic) {
   'use strict';
 
-  var thingId = $routeParams.id;
-  $scope.thing = Thing.find(thingId);
-
-  $scope.thingImage = function(thing) {
-    return $window.__config__.cdnUrl + '/images/' + thing.name.toLowerCase() + '.jpeg';
-  };
+  // var thingId = $routeParams.id;
+  // $scope.thing = Thing.find(thingId);
+  //
+  // $scope.thingImage = function(thing) {
+  //   return $window.__config__.cdnUrl + '/images/' + thing.name.toLowerCase() + '.jpeg';
+  // };
 });

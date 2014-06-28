@@ -43,16 +43,12 @@ module.exports = function(grunt) {
         dest: 'dist/styles.min.css'
       }
     },
-    // watch: {
-    //   // scripts: {
-    //   //   files: ['**/*.js'],
-    //   //   tasks: ['uglify', 'stylus']
-    //   // },
-    //   css: {
-    //     files: ['css/*.styl'],
-    //     tasks: ['stylus', 'cssmin', 'clean']
-    //   }
-    // },
+    watch: {
+      css: {
+        files: ['css/*.styl'],
+        tasks: ['stylus', 'cssmin', 'clean']
+      }
+    },
     ngmin: {
       target: {
         src: ['js/**/*.js'],
@@ -62,10 +58,15 @@ module.exports = function(grunt) {
     clean: ['tmp'],
     aerobatic: {
       deploy: {
-        src: ['index.html', 'dist/*.*', 'favicons/*'],
+        src: ['index.html', 'login.html', 'dist/*.*', 'favicons/*'],
       },
       sim: {
         index: 'index.html',
+        login: 'login.html',
+        ssl: {
+          key: 'ssl/key.pem',
+          cert: 'ssl/cert.pem'
+        },
         port: 3000,
         watch: {
           stylus: {
@@ -77,14 +78,14 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('sim', ['aerobatic:sim']);
+  grunt.registerTask('sim', ['build', 'aerobatic:sim:sync', 'watch']);
   grunt.registerTask('deploy', ['build', 'aerobatic:deploy']);
 
   grunt.registerTask('build', ['jshint', 'stylus', 'cssmin', 'ngmin', 'uglify', 'clean']);
 
   grunt.loadNpmTasks('grunt-favicons');
-  // grunt.loadNpmTasks('grunt-aerobatic');
-  grunt.loadTasks('../grunt-aerobatic/tasks');
+  grunt.loadNpmTasks('grunt-aerobatic');
+  // grunt.loadTasks('../grunt-aerobatic/tasks');
   grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');

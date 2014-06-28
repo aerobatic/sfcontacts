@@ -4,30 +4,39 @@
  * @type {angular.Module}
  */
 
-angular.module('seedServices', []);
-angular.module('seedControllers', []);
+angular.module('services', []).value('aerobatic', window.__config__);
 
-angular.module('angularSeed', ['ngRoute', 'seedServices', 'seedControllers'])
-  .config(function ($routeProvider, $locationProvider) {
-    function templateUrl(path) {
-      if (__config__.simulator === true)
-        return path + '?sim=1&port=' + __config__.simulatorPort;
-      else
-        return path;
-    }
+angular.module('controllers', ['services']);
+angular.module('sfContacts', ['ngRoute', 'services', 'controllers']);
 
-    // Use the bang prefix for Google ajax crawlability
-    // https://developers.google.com/webmasters/ajax-crawling/docs/specification?csw=1
-    $locationProvider.hashPrefix('!');
 
-    $routeProvider
-      .when('/', {
-        controller: 'IndexCtrl',
-        templateUrl: templateUrl('partials/index.html')
-      })
-      .when('/:id', {
-        controller: 'DetailCtrl',
-        templateUrl: templateUrl('partials/detail.html')
-      })
-      .otherwise({redirectTo: '/'});
-  });
+angular.module('sfContacts').config(function ($routeProvider, $locationProvider, $sceDelegateProvider) {
+  $sceDelegateProvider.resourceUrlWhitelist([
+    'http://' + __config__.cdnHost + '/**',
+    'https://' + __config__.cdnHost + '/**'
+  ]);
+
+  $routeProvider
+    .when('/', {
+      controller: 'IndexCtrl',
+      templateUrl: __config__.cdnUrl + '/partials/index.html'
+    })
+    .when('/:id', {
+      controller: 'DetailCtrl',
+      templateUrl: __config__.cdnUrl + '/partials/detail.html'
+    })
+    .otherwise({redirectTo: '/'});
+});
+
+
+angular.module('sfContacts').run(function($rootScope, $route, $window, $log, aerobatic) {
+  $rootScope.logoutUrl = aerobatic.logoutUrl;
+
+  // $rootScope.$on('$locationChangeStart', function(event, next, current) {
+  //   if (!aerobatic.user) {
+  //
+  //   }
+  //
+  //   $log.info('locationChange to ' + next);
+  // });
+});
