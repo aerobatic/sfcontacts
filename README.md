@@ -1,8 +1,6 @@
-# angular-seed - the seed for AngularJS apps on the Aerobatic platform
+Sample Salesforce contact manager app built on the [Aerobatic](http://www.aerobatic.io) HTML5 platform.
 
-This project serves as a reasonable skeleton for building [AngularJS](http://angularjs.org/) web apps on the [Aerobatic](http://www.aerobaticapp.com) platform. Fork this project and use it as a starting point for your own app.
-
-You can see the angular-seed app live at [http://angular-seed.aerobaticapp.com](http://angular-seed.aerobaticapp.com).
+You can see the angular-seed app live at https://sfcontacts.aerobaticapp.com
 
 
-http://docs.nodejitsu.com/articles/HTTP/servers/how-to-create-a-HTTPS-server
+/* http://docs.nodejitsu.com/articles/HTTP/servers/how-to-create-a-HTTPS-server*/
