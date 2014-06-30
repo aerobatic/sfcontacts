@@ -15,37 +15,18 @@
     <link rel="apple-touch-icon" sizes="57x57" href="favicons/apple-touch-icon.png">
     <link rel="shortcut icon" href="favicons/favicon.ico">
     <link rel="icon" type="image/png" sizes="64x64" href="favicons/favicon.png">
-    <link type="text/css" rel="Stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-
-    <style type="text/css">
-      body {
-        padding-top: 40px;
-        padding-bottom: 40px;
-        background-color: #eee;
-      }
-
-      div.signin {
-        max-width: 400px;
-        padding: 15px;
-        margin: 0 auto;
-        border: solid 2px blue;
-        border-radius: 6px;
-        background-color: #FFF
-      }
-
-      div.signin h2 {
-        margin-bottom: 20px;
-      }
-    </style>
+    <link type="text/css" rel="Stylesheet" href="libs/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link type="text/css" rel="Stylesheet" href="dist/styles.min.css">
   </head>
   <body>
     <div ng-app="sfContacts" ng-controller="LoginCtrl">
 
       <div class="container">
         <div class="row">
-          <div class="signin">
-            <h2>Salesforce Contacts App</h2>
-            <a href="{{authUrl}}" class="btn btn-primary btn-lg btn-block">Sign In</a>
+          <div class="signin panel panel-default">
+            <h2>Aerobatic Contacts App</h2>
+            <a href="{{authUrl}}" class="btn btn-primary btn-lg btn-block">Sign In with Salesforce</a>
           </div>
         </div>
       </div>
@@ -54,6 +35,7 @@
     <!-- 3rd party scripts -->
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.min.js"></script>
+    <script src="libs/ui-bootstrap-custom-tpls-0.10.0.min.js"></script>
 
     <!-- Consolidated release script which will be stripped from debug builds  -->
     <script data-aero-cdn="true" data-aero-build="release" src="dist/app.min.js"></script>

@@ -3,45 +3,53 @@
     <title>Aerobatic Salesforce Contacts</title>
 
     <!-- Using the compiled css for both debug and release since it is compiled stylus -->
-    <link data-aero-cdn="true" rel="Stylesheet" href="dist/styles.min.css">
-
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-  	
-    <link type="text/css" rel="Stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
   	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="favicons/apple-touch-icon-152x152-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="favicons/apple-touch-icon-120x120-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="favicons/apple-touch-icon-76x76-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="60x60" href="favicons/apple-touch-icon-60x60-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="favicons/apple-touch-icon-144x144-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="favicons/apple-touch-icon-114x114-precomposed.png">
-	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicons/apple-touch-icon-72x72-precomposed.png">
-	<link rel="apple-touch-icon" sizes="57x57" href="favicons/apple-touch-icon.png">
-	<link rel="shortcut icon" href="favicons/favicon.ico">
-	<link rel="icon" type="image/png" sizes="64x64" href="favicons/favicon.png">
-</head>
+  	<link rel="apple-touch-icon-precomposed" sizes="120x120" href="favicons/apple-touch-icon-120x120-precomposed.png">
+  	<link rel="apple-touch-icon-precomposed" sizes="76x76" href="favicons/apple-touch-icon-76x76-precomposed.png">
+  	<link rel="apple-touch-icon-precomposed" sizes="60x60" href="favicons/apple-touch-icon-60x60-precomposed.png">
+  	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="favicons/apple-touch-icon-144x144-precomposed.png">
+  	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="favicons/apple-touch-icon-114x114-precomposed.png">
+  	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="favicons/apple-touch-icon-72x72-precomposed.png">
+  	<link rel="apple-touch-icon" sizes="57x57" href="favicons/apple-touch-icon.png">
+  	<link rel="shortcut icon" href="favicons/favicon.ico">
+  	<link rel="icon" type="image/png" sizes="64x64" href="favicons/favicon.png">
+
+    <link type="text/css" rel="Stylesheet" href="libs/bootstrap.min.css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+    <link type="text/css" rel="Stylesheet" href="dist/styles.min.css">
+  </head>
   <body>
-    <div ng-app="sfContacts">
-      <section id="header">
-        <h3>Salesforce Contacts App</h3>
-        <a href="{{logoutUrl}}">Logout</a>
+    <div ng-app="sfContacts", ng-controller="MainCtrl">
+      <div class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="../" class="navbar-brand">Aerobatic Contacts Manager</a>
+          <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar-main">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">{{aerobatic.user.displayName}}</a></li>
+            <li><a href="{{aerobatic.logoutUrl}}">Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container">
+      <section id="main" ng-view="">
       </section>
-
-      <section id="main" ng-view=""></section>
-
-      <section id="footer"></section>
     </div>
 
     <!-- 3rd party scripts -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular-route.min.js"></script>
+    <script src="libs/ui-bootstrap-custom-tpls-0.10.0.min.js"></script>
 
     <!-- Consolidated release script which will be stripped from debug builds  -->
     <script data-aero-cdn="true" data-aero-build="release" src="dist/app.min.js"></script>
@@ -51,6 +59,7 @@
       <script data-aero-build="debug" src="js/app.js"></script>
       <script data-aero-build="debug" src="js/controllers/indexCtrl.js"></script>
       <script data-aero-build="debug" src="js/controllers/detailCtrl.js"></script>
+      <script data-aero-build="debug" src="js/controllers/mainCtrl.js"></script>
     </div>
   </body>
 </html>

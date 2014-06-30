@@ -7,6 +7,7 @@
 angular.module('services', []).value('aerobatic', window.__config__);
 
 angular.module('controllers', ['services']);
+//'ui.bootstrap',
 angular.module('sfContacts', ['ngRoute', 'services', 'controllers']);
 
 

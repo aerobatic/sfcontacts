@@ -1,8 +1,43 @@
 <div>
-  <h1>My Contacts</h1>
-  <ul>
-    <li ng-repeat="contact in contacts">
-      <a ng-href="#!/{{contact.id}}">{{contact.name}}</a>
-    </li>
-  </ul>
+  <div class="row">
+    <div class="col-md-6"><span class="h2">My Contacts</span></div>
+    <div class="col-md-6">
+      <form class="form-inline pull-right" ng-hide="contactsLoading">
+        <input type="text" class="form-control" placeholder="Filter Contacts" ng-model="filterText" />
+      </form>
+    </div>
+  </div>
+
+  <div class="loading panel panel-default" ng-show="contactsLoading">
+    <div class="row">
+      <div class="col-md-4">
+        <i class="fa fa-spinner fa-spin"></i>
+      </div>
+      <div class="col-md-8">
+        <h2>Contacts Loading</h2>
+      </div>
+    </div>
+  </div>
+
+  <h3 ng-show="noMatchingContacts">No Matching Contacts</h3>
+
+  <div class="row" ng-repeat="row in contactRows" ng-hide="contactsLoading">
+    <div class="col-md-4" ng-repeat="contact in row">
+      <div class="panel panel-default contact">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="user">
+              <i class="fa fa-user"></i>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <h3>{{contact.Name}}</h3>
+            <div ng-show="contact.Title">{{contact.Title}}</div>
+            <div ng-show="contact.Phone">{{contact.Phone}}</div>
+            <div ng-show="contact.Email">{{contact.Email}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -44,9 +44,25 @@ module.exports = function(grunt) {
       }
     },
     watch: {
-      css: {
+      options: {
+        livereload: {
+          key: grunt.file.read('ssl/key.pem'),
+          cert: grunt.file.read('ssl/cert.pem')
+        },
+        spawn: true
+      },
+      stylus: {
         files: ['css/*.styl'],
         tasks: ['stylus', 'cssmin', 'clean']
+      },
+      js: {
+        files: ['js/**/*.js']
+      },
+      views: {
+        files: ['partials/*.html']
+      },
+      css: {
+        files: ['dist/*.css']
       }
     },
     ngmin: {
@@ -58,7 +74,7 @@ module.exports = function(grunt) {
     clean: ['tmp'],
     aerobatic: {
       deploy: {
-        src: ['index.html', 'login.html', 'dist/*.*', 'favicons/*', 'partials/*.html'],
+        src: ['index.html', 'login.html', 'dist/*.*', 'favicons/*', 'partials/*.html', 'libs/**/*.*'],
       },
       sim: {
         index: 'index.html',
@@ -68,12 +84,7 @@ module.exports = function(grunt) {
           cert: 'ssl/cert.pem'
         },
         port: 3000,
-        watch: {
-          stylus: {
-            files: ['css/*.styl', 'css/*.css'],
-            tasks: ['stylus', 'cssmin', 'clean']
-          }
-        }
+        livereload: true
       }
     }
   });
@@ -85,7 +96,6 @@ module.exports = function(grunt) {
 
   grunt.loadNpmTasks('grunt-favicons');
   grunt.loadNpmTasks('grunt-aerobatic');
-  // grunt.loadTasks('../grunt-aerobatic/tasks');
   grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
