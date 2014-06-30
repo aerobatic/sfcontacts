@@ -36,10 +36,10 @@ angular.module('controllers').controller('IndexCtrl', function($scope, $location
 
     $log.info("Filtering on " + newValue);
     var filtered = _.filter(contacts, function(contact) {
-      return contact.Name.indexOf(newValue) !== -1;
+      return contact.Name.toLowerCase().indexOf(newValue.toLowerCase()) !== -1;
     });
 
-    if (filtered.length == 0) {
+    if (filtered.length === 0) {
       $scope.noMatchingContacts = true;
       $scope.contactRows = [];
       return;
@@ -53,7 +53,7 @@ angular.module('controllers').controller('IndexCtrl', function($scope, $location
   function divideIntoRows(contactList) {
     var contactRows = [[]];
     for (var i=0; i<contactList.length; i++) {
-      if (contactRows[contactRows.length - 1].length == 3)
+      if (contactRows[contactRows.length - 1].length === 3)
         contactRows.push([contactList[i]]);
       else
         contactRows[contactRows.length- 1].push(contactList[i]);
