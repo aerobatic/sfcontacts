@@ -15,11 +15,11 @@
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- Single consolidated and minified stylesheet in release mode -->
-    <link aero-build-type="release" type="text/css" rel="Stylesheet" href="dist/app.min.css">
+    <link data-aero-build="release" type="text/css" rel="Stylesheet" href="dist/app.min.css">
 
     <!-- Use individual stylesheets in debug mode -->
-    <link aero-build-type="debug" type="text/css" rel="Stylesheet" href="css/bootstrap-flatly.css">
-    <link aero-build-type="debug" type="text/css" rel="Stylesheet" href="css/styles.css">
+    <link data-aero-build="debug" type="text/css" rel="Stylesheet" href="css/bootstrap-flatly.css">
+    <link data-aero-build="debug" type="text/css" rel="Stylesheet" href="css/styles.css">
   </head>
   <body>
     <div ng-app="sfContacts" ng-controller="LoginCtrl">
@@ -31,11 +31,14 @@
             <h2>Aerobatic Contacts App</h2>
             <a href="{{aerobatic.authUrl}}" class="btn btn-primary btn-lg btn-block">Sign In with Salesforce</a>
 
-            <div>
+            <div class="powered-by">
+              <h4>Powered By:</h4>
               <a href="http://www.aerobatic.io"><img class="img-responsive" asset-src="images/aerobatic-logo.png" alt="Aerobatic"></a>
             </div>
 
-            <a class="btn btn-default btn-block" href="https://github.com/aerobatic/sfcontacts">Fork on GitHub</a>
+            <a class="btn btn-default btn-block" href="https://github.com/aerobatic/sfcontacts">
+              <i class="fa fa-github fa-lg"></i>&nbsp;&nbsp;<span>Fork on GitHub</span>
+            </a>
           </div>
         </div>
       </div>
@@ -56,6 +59,7 @@
       <script src="js/app.js"></script>
       <script src="js/controllers/loginCtrl.js"></script>
       <script src="js/services/salesforce.js"></script>
+      <script src="js/directives/assetSrc.js"></script>
     </div>
   </body>
 </html>

@@ -24,6 +24,15 @@ div.signin h2 {
   margin-bottom: 20px;
 }
 
+div.powered-by {
+  margin: 15px 0;
+  text-align: center;
+}
+
+div.powered-by img {
+  margin: 0 auto;
+}
+
 div.loading {
   max-width: 340px;
   padding: 15px;

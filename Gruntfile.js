@@ -10,7 +10,7 @@ module.exports = function(grunt) {
     uglify: {
       build: {
         files: {
-          'dist/app.min.js': ['tmp/build.js']
+          'dist/app.min.js': ['tmp/annotated.js']
         }
       }
     },
@@ -40,16 +40,17 @@ module.exports = function(grunt) {
         files: ['index.html', 'login.html', 'js/**/*.js','partials/*.html', 'css/*.css']
       }
     },
-    ngmin: {
+    ngAnnotate: {
       target: {
-        src: ['js/**/*.js'],
-        dest: 'tmp/build.js'
+        files: {
+          'tmp/annotated.js': ['js/**/*.js']
+        }
       }
     },
     clean: ['tmp'],
     aerobatic: {
       deploy: {
-        src: ['index.html', 'login.html', 'dist/*.*', 'favicons/*', 'partials/*.html'],
+        src: ['index.html', 'login.html', 'dist/*.*', 'favicons/*', 'partials/*.html', 'images/*.*'],
       },
       sim: {
         index: 'index.html',
@@ -67,7 +68,7 @@ module.exports = function(grunt) {
   grunt.registerTask('sim', ['build', 'aerobatic:sim:sync', 'watch']);
   grunt.registerTask('deploy', ['build', 'aerobatic:deploy']);
 
-  grunt.registerTask('build', ['jshint', 'copy', 'cssmin', 'ngmin', 'uglify', 'clean']);
+  grunt.registerTask('build', ['jshint', 'copy', 'cssmin', 'ngAnnotate', 'uglify', 'clean']);
 
   grunt.loadNpmTasks('grunt-aerobatic');
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -76,5 +77,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
-  grunt.loadNpmTasks('grunt-ngmin');
+  grunt.loadNpmTasks('grunt-ng-annotate');
 };

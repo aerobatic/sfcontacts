@@ -7,8 +7,8 @@
 angular.module('services', []).value('aerobatic', window.__config__);
 
 angular.module('controllers', ['services']);
-//'ui.bootstrap',
-angular.module('sfContacts', ['ui.bootstrap', 'services', 'controllers']);
+angular.module('directives', ['services']);
+angular.module('sfContacts', ['ui.bootstrap', 'services', 'controllers', 'directives']);
 
 angular.module('sfContacts').config(function ($locationProvider, $sceDelegateProvider, $httpProvider) {
   // Tell angular to trust loading template from the Aerobatic CDN.
