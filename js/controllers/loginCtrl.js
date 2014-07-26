@@ -1,6 +1,7 @@
 
-angular.module('controllers').controller('LoginCtrl', function($scope, $location, aerobatic) {
+angular.module('controllers').controller('LoginCtrl', function($scope, $window, aerobatic) {
   'use strict';
 
-  $scope.authUrl = aerobatic.authUrl;
+  $scope.aerobatic = aerobatic;
+  $scope.sessionTimeout = /error=expired/.test($window.location.href);
 });

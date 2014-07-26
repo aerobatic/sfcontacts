@@ -1,0 +1,62 @@
+/*Recommended css overrides by http://angular-ui.github.io/bootstrap/*/
+.nav, .pagination, .carousel, .panel-title a {
+  cursor: pointer;
+}
+
+/* Used to hide bound angular elements until the controller has loaded */
+.ng-cloak, [ng-cloak] {
+  display: none;
+}
+
+body {
+  padding-top: 75px;
+  background-color: #f7f7f7;
+}
+
+div.signin {
+  max-width: 400px;
+  padding: 15px;
+  margin: 0 auto;
+  background-color: #FFF;
+}
+
+div.signin h2 {
+  margin-bottom: 20px;
+}
+
+div.loading {
+  max-width: 340px;
+  padding: 15px;
+  margin: 0 auto;
+  background-color: #FFF;
+}
+
+div.loading .fa-spinner {
+  font-size: 90px;
+}
+
+div.loading  h2 {
+  margin: 10px 0 0 0;
+}
+
+.panel.contact {
+  padding: 12px
+}
+
+.panel.contact h3 {
+  margin: 0 0 10px 0;
+}
+
+.panel.contact .fa-user {
+  font-size: 90px;
+  color: silver;
+}
+
+/* Add margin above rows in modal forms */
+form .modal-body .row:not(:first-child){
+  margin-top: 15px;
+}
+
+.modal-footer .fa-spinner {
+  margin-right: 10px;
+}

@@ -8,36 +8,30 @@ angular.module('services', []).value('aerobatic', window.__config__);
 
 angular.module('controllers', ['services']);
 //'ui.bootstrap',
-angular.module('sfContacts', ['ngRoute', 'services', 'controllers']);
+angular.module('sfContacts', ['ui.bootstrap', 'services', 'controllers']);
 
-
-angular.module('sfContacts').config(function ($routeProvider, $locationProvider, $sceDelegateProvider) {
+angular.module('sfContacts').config(function ($locationProvider, $sceDelegateProvider, $httpProvider) {
+  // Tell angular to trust loading template from the Aerobatic CDN.
+  // In simulator mode cdnHost will be localhost
   $sceDelegateProvider.resourceUrlWhitelist([
-    'http://' + __config__.cdnHost + '/**',
+    // Need the special 'self' keyword so the angular-ui templates are trusted
+    'self',
     'https://' + __config__.cdnHost + '/**'
   ]);
 
-  $routeProvider
-    .when('/', {
-      controller: 'IndexCtrl',
-      templateUrl: __config__.cdnUrl + '/partials/index.html'
-    })
-    .when('/:id', {
-      controller: 'DetailCtrl',
-      templateUrl: __config__.cdnUrl + '/partials/detail.html'
-    })
-    .otherwise({redirectTo: '/'});
-});
+  // Register the custom $http interceptor
+  $httpProvider.interceptors.push(function($q, $window, aerobatic) {
+    return {
+      responseError: function(rejection) {
+        var status = rejection.status;
+        // If the status is 401 Unauthorized, automatically logout
+        if (status == 401) {
+          $window.location = aerobatic.logoutUrl + (logoutUrl.indexOf('?') == -1 ? '?' : '&') + 'error=expired';
+          return;
+        }
 
-
-angular.module('sfContacts').run(function($rootScope, $route, $window, $log, aerobatic) {
-  $rootScope.logoutUrl = aerobatic.logoutUrl;
-
-  // $rootScope.$on('$locationChangeStart', function(event, next, current) {
-  //   if (!aerobatic.user) {
-  //
-  //   }
-  //
-  //   $log.info('locationChange to ' + next);
-  // });
+        return $q.reject(rejection);
+      }
+    };
+  });
 });

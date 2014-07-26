@@ -7,18 +7,6 @@ module.exports = function(grunt) {
     jshint: {
       all: ['Gruntfile.js', 'js/**/*.js', 'test/**/*.js']
     },
-    favicons: {
-      options: {
-        appleTouchBackgroundColor: "#ffffff",
-        html: 'index.html',
-        HTMLPrefix: 'favicons/',
-        windowsTile: false
-      },
-      icons: {
-        src: 'favicon.png',
-        dest: 'favicons'
-      }
-    },
     uglify: {
       build: {
         files: {
@@ -26,21 +14,18 @@ module.exports = function(grunt) {
         }
       }
     },
-    stylus: {
-      compile: {
-        options: {
-          paths: ['css'],
-          'include css': true
-        },
-        files: {
-          'tmp/styles.css': ['css/*.styl'] // compile and concat into single file
-        }
+    copy: {
+      components: {
+        src: ['bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js'],
+        dest: 'dist/',
+        expand: true,
+        flatten: true
       }
     },
     cssmin: {
       minify: {
-        src: ['tmp/styles.css'],
-        dest: 'dist/styles.min.css'
+        src: ['css/bootstrap-flatly.css', 'css/styles.css'],
+        dest: 'dist/app.min.css'
       }
     },
     watch: {
@@ -51,18 +36,8 @@ module.exports = function(grunt) {
         },
         spawn: true
       },
-      stylus: {
-        files: ['css/*.styl'],
-        tasks: ['stylus', 'cssmin', 'clean']
-      },
-      js: {
-        files: ['js/**/*.js']
-      },
-      views: {
-        files: ['partials/*.html']
-      },
-      css: {
-        files: ['dist/*.css']
+      all: {
+        files: ['index.html', 'login.html', 'js/**/*.js','partials/*.html', 'css/*.css']
       }
     },
     ngmin: {
@@ -74,7 +49,7 @@ module.exports = function(grunt) {
     clean: ['tmp'],
     aerobatic: {
       deploy: {
-        src: ['index.html', 'login.html', 'dist/*.*', 'favicons/*', 'partials/*.html', 'libs/**/*.*'],
+        src: ['index.html', 'login.html', 'dist/*.*', 'favicons/*', 'partials/*.html'],
       },
       sim: {
         index: 'index.html',
@@ -92,14 +67,13 @@ module.exports = function(grunt) {
   grunt.registerTask('sim', ['build', 'aerobatic:sim:sync', 'watch']);
   grunt.registerTask('deploy', ['build', 'aerobatic:deploy']);
 
-  grunt.registerTask('build', ['jshint', 'stylus', 'cssmin', 'ngmin', 'uglify', 'clean']);
+  grunt.registerTask('build', ['jshint', 'copy', 'cssmin', 'ngmin', 'uglify', 'clean']);
 
-  grunt.loadNpmTasks('grunt-favicons');
   grunt.loadNpmTasks('grunt-aerobatic');
-  grunt.loadNpmTasks('grunt-contrib-stylus');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
+  grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-ngmin');

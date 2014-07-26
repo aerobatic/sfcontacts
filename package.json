@@ -1,39 +1,39 @@
 {
-  "name": "angular-seed",
+  "name": "sfcontacts",
   "version": "1.0.0",
-  "description": "Angular seed project for the Aerobatic platform",
+  "description": "Sample Salesforce connected app running on the Aerobatic platform",
   "main": "yoke sim",
   "directories": {
     "test": "test"
   },
   "scripts": {
-    "test": "yoke test"
+    "test": "grunt test"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/aerobatic/angular-seed.git"
+    "url": "git://github.com/aerobatic/sfcontacts.git"
   },
   "keywords": [
     "aerobatic",
-    "angular",
-    "seed"
+    "salesforce",
+    "html5",
+    "angular"
   ],
   "author": "David Von Lehman",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/aerobatic/angular-seed/issues"
+    "url": "https://github.com/aerobatic/sfcontacts/issues"
   },
-  "homepage": "https://github.com/aerobatic/angular-seed",
+  "homepage": "https://sfcontacts.aerobaticapp.com",
   "devDependencies": {
     "grunt": "^0.4.5",
-    "grunt-favicons": "^0.6.4",
     "grunt-contrib-uglify": "^0.5.0",
-    "grunt-contrib-stylus": "^0.17.0",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-ngmin": "0.0.3",
-    "grunt-contrib-clean": "^0.5.0",
     "grunt-contrib-cssmin": "^0.10.0",
-    "grunt-aerobatic": "^0.1.5"
+    "grunt-aerobatic": "^0.1.8",
+    "grunt-contrib-copy": "^0.5.0",
+    "grunt-contrib-clean": "^0.5.0"
   }
 }
