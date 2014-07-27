@@ -48,6 +48,18 @@ div.loading  h2 {
   margin: 10px 0 0 0;
 }
 
+#filterForm input[type=text]{
+  width: 180px;
+  display: inline-block;
+  float: left;
+}
+
+#filterForm button {
+  display: inline-block;
+  margin-right: 10px;
+  float: left;
+}
+
 .panel.contact {
   padding: 12px
 }
@@ -55,6 +67,7 @@ div.loading  h2 {
 .panel.contact h3 {
   margin: 0 0 10px 0;
 }
+
 
 .panel.contact .fa-user {
   font-size: 90px;

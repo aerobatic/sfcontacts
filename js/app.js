@@ -29,7 +29,7 @@ angular.module('sfContacts').config(function ($locationProvider, $sceDelegatePro
         var status = rejection.status;
         // If the status is 401 Unauthorized, automatically logout
         if (status == 401) {
-          $window.location = aerobatic.logoutUrl + (logoutUrl.indexOf('?') == -1 ? '?' : '&') + 'error=expired';
+          $window.location = aerobatic.logoutUrl + (aerobatic.logoutUrl.indexOf('?') == -1 ? '?' : '&') + 'error=expired';
           return;
         }
 
