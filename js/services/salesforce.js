@@ -9,7 +9,8 @@ angular.module('services').factory('Salesforce', function($http, $q, $log, aerob
       headers: {}
     });
 
-    config.headers['Content-Type'] = 'application/json; charset=UTF-8';
+    if (_.contains(['POST', 'PATCH'], config.method))
+      config.headers['Content-Type'] = 'application/json; charset=UTF-8';
 
     // The token user.accessToken will get replaced by Aerobatic
     // with the actual access_token that came back in the
@@ -17,6 +18,8 @@ angular.module('services').factory('Salesforce', function($http, $q, $log, aerob
     // token securely stored on the server and avoids passing
     // it over the network.
     config.headers['X-Authorization'] = 'OAuth @@user.accessToken@@';
+
+    config.headers.Accept = 'application/json';
 
     // Wrap the url in a call to the API proxy
     config.url = '/proxy?url=' + encodeURIComponent(url);
@@ -29,7 +32,13 @@ angular.module('services').factory('Salesforce', function($http, $q, $log, aerob
     var soql = "SELECT Id, FirstName, LastName, Title, Phone, Email FROM Contact";
     var url = apiEndpoint + "/query?q=" + encodeURIComponent(soql);
 
-    return $http(buildHttpConfig(url));
+    var deferred = $q.defer();
+    $http(buildHttpConfig(url)).success(function(data) {
+      deferred.resolve(data);
+    }).error(function(err, status) {
+      deferred.reject(err);
+    });
+    return deferred.promise;
   };
 
   salesforce.createContact = function(contact) {
@@ -41,7 +50,6 @@ angular.module('services').factory('Salesforce', function($http, $q, $log, aerob
       contact.Id = data.id;
       deferred.resolve(contact);
     }).error(function(err, status) {
-      
       deferred.reject(err);
     });
 

@@ -8,28 +8,25 @@ angular.module('controllers').controller('MainCtrl', function($scope, $log, $mod
   $scope.contactsLoading = true;
   $scope.filterText = '';
 
-  Salesforce.loadContacts().success(function(data) {
+  Salesforce.loadContacts().then(function(data) {
     $log.info("Salesforce returned " + data.records.length + " contacts");
     $scope.contactsLoading = false;
     contacts = data.records;
     divideIntoRows(contacts);
-  }).error(function(data) {
+  }, function(data) {
     $scope.contactsLoading = false;
     // TODO: Show an error message in the view
     $log.error(data);
   });
 
-  $scope.$watch('filterText', function(newValue, oldValue) {
-    if (newValue === oldValue)
-      return;
-
-    $log.info("Filtering on " + newValue);
+  $scope.filterChange = function() {
+    $log.info("Filtering on " + $scope.filterText);
     var filtered = _.filter(contacts, function(contact) {
       var fieldsToSearch = ['FirstName', 'LastName'];
-      newValue = newValue.toLowerCase();
+      var textToMatch = $scope.filterText.toLowerCase();
 
       return _.any(fieldsToSearch, function(field) {
-        return _.isString(contact[field]) && contact[field].toLowerCase().indexOf(newValue) !== -1;
+        return _.isString(contact[field]) && contact[field].toLowerCase().indexOf(textToMatch) !== -1;
       });
     });
 
@@ -41,7 +38,7 @@ angular.module('controllers').controller('MainCtrl', function($scope, $log, $mod
 
     delete $scope.noMatchingContacts;
     divideIntoRows(filtered);
-  });
+  };
 
   $scope.openContactModal = function(contact) {
     var modalInstance = $modal.open({

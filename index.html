@@ -50,7 +50,7 @@
         <div class="col-md-6">
           <form class="form-inline pull-right" ng-hide="contactsLoading">
             <button class="btn btn-default" ng-click="openContactModal()"><i class="fa fa-user"></i>&nbsp;&nbsp;New Contact</button>
-            <input type="text" class="form-control" placeholder="Filter Contacts" ng-model="filterText" />
+            <input type="text" class="form-control" placeholder="Filter Contacts" ng-model="filterText" ng-change="filterChange()" />
           </form>
         </div>
       </div>

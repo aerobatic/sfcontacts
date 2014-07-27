@@ -62,6 +62,30 @@ module.exports = function(grunt) {
         port: 3000,
         livereload: true
       }
+    },
+    karma: {
+      options: {
+        files: [
+          'http://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js',
+          'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js',
+          'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-mocks.js',
+          'test/fixtures.js',
+          'js/**/*.js',
+          'test/spec/**/*.js'
+        ],
+        frameworks: ['jasmine'],
+        browsers: ['Chrome'], //['PhantomJS'],
+        logLevel: 'INFO',
+        plugins : [
+          'karma-jasmine',
+          'karma-phantomjs-launcher',
+          'karma-chrome-launcher'
+        ],
+        reporters: 'dots'
+      },
+      unit: {
+        singleRun: true
+      }
     }
   });
 
@@ -69,6 +93,7 @@ module.exports = function(grunt) {
   grunt.registerTask('deploy', ['build', 'aerobatic:deploy']);
 
   grunt.registerTask('build', ['jshint', 'copy', 'cssmin', 'ngAnnotate', 'uglify', 'clean']);
+  grunt.registerTask('test', ['karma']);
 
   grunt.loadNpmTasks('grunt-aerobatic');
   grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -78,4 +103,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-ng-annotate');
+  grunt.loadNpmTasks('grunt-karma');
 };

@@ -12,6 +12,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "angular-ui-bootstrap-bower": "~0.11.0"
+    "angular-ui-bootstrap-bower": "~0.11.0",
+    "karma-jasmine": "~0.2.2"
   }
 }

@@ -4,7 +4,9 @@
  * @type {angular.Module}
  */
 
-angular.module('services', []).value('aerobatic', window.__config__);
+angular.module('services', []).factory('aerobatic', function($window) {
+  return $window.__config__;
+});
 
 angular.module('controllers', ['services']);
 angular.module('directives', ['services']);
@@ -13,10 +15,11 @@ angular.module('sfContacts', ['ui.bootstrap', 'services', 'controllers', 'direct
 angular.module('sfContacts').config(function ($locationProvider, $sceDelegateProvider, $httpProvider) {
   // Tell angular to trust loading template from the Aerobatic CDN.
   // In simulator mode cdnHost will be localhost
+
   $sceDelegateProvider.resourceUrlWhitelist([
     // Need the special 'self' keyword so the angular-ui templates are trusted
     'self',
-    'https://' + __config__.cdnHost + '/**'
+    'https://' + window.__config__.cdnHost + '/**'
   ]);
 
   // Register the custom $http interceptor
