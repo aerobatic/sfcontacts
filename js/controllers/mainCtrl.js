@@ -4,20 +4,20 @@ angular.module('controllers').controller('MainCtrl', function($scope, $log, $mod
 
   $scope.aerobatic = aerobatic;
 
-  var contacts;
-  $scope.contactsLoading = true;
-  $scope.filterText = '';
+var contacts;
+$scope.contactsLoading = true;
+$scope.filterText = '';
 
-  Salesforce.loadContacts().then(function(data) {
-    $log.info("Salesforce returned " + data.records.length + " contacts");
-    $scope.contactsLoading = false;
-    contacts = data.records;
-    divideIntoRows(contacts);
-  }, function(data) {
-    $scope.contactsLoading = false;
-    // TODO: Show an error message in the view
-    $log.error(data);
-  });
+Salesforce.loadContacts().then(function(data) {
+  $log.info("Salesforce returned " + data.records.length + " contacts");
+  $scope.contactsLoading = false;
+  contacts = data.records;
+  divideIntoRows(contacts);
+}, function(data) {
+  $scope.contactsLoading = false;
+  // TODO: Show an error message in the view
+  $log.error(data);
+});
 
   $scope.filterChange = function() {
     $log.info("Filtering on " + $scope.filterText);

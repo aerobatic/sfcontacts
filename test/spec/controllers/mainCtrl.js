@@ -28,6 +28,7 @@ describe("mainCtrl", function() {
     scope.$root.$digest();
 
     expect(salesforceMock.loadContacts).toHaveBeenCalled();
+    expect(scope.contactRows.length).toEqual(2);
   });
 
   it('should divide contacts up into rows', function() {
