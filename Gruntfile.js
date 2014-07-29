@@ -74,11 +74,10 @@ module.exports = function(grunt) {
           'test/spec/**/*.js'
         ],
         frameworks: ['jasmine'],
-        browsers: ['Chrome'], //['PhantomJS'],
+        browsers: ['Chrome'],
         logLevel: 'INFO',
         plugins : [
           'karma-jasmine',
-          'karma-phantomjs-launcher',
           'karma-chrome-launcher'
         ],
         reporters: 'dots'
