@@ -30,10 +30,7 @@ module.exports = function(grunt) {
     },
     watch: {
       options: {
-        livereload: {
-          key: grunt.file.read('ssl/key.pem'),
-          cert: grunt.file.read('ssl/cert.pem')
-        },
+        livereload: true,
         spawn: true
       },
       all: {
@@ -55,12 +52,8 @@ module.exports = function(grunt) {
       sim: {
         index: 'index.html',
         login: 'login.html',
-        ssl: {
-          key: 'ssl/key.pem',
-          cert: 'ssl/cert.pem'
-        },
-        port: 3000,
-        livereload: true
+        protocol: 'https',
+        port: 3000
       }
     },
     karma: {
@@ -94,7 +87,8 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['jshint', 'copy', 'cssmin', 'ngAnnotate', 'uglify', 'clean']);
   grunt.registerTask('test', ['karma']);
 
-  grunt.loadNpmTasks('grunt-aerobatic');
+  grunt.loadTasks("../grunt-aerobatic/tasks");
+  // grunt.loadNpmTasks('grunt-aerobatic');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
