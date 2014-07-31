@@ -87,8 +87,7 @@ module.exports = function(grunt) {
   grunt.registerTask('build', ['jshint', 'copy', 'cssmin', 'ngAnnotate', 'uglify', 'clean']);
   grunt.registerTask('test', ['karma']);
 
-  grunt.loadTasks("../grunt-aerobatic/tasks");
-  // grunt.loadNpmTasks('grunt-aerobatic');
+  grunt.loadNpmTasks('grunt-aerobatic');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');

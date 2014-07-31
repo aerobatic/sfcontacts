@@ -1,18 +1,28 @@
-Sample Salesforce contact manager app built on the [Aerobatic](http://www.aerobatic.io) HTML5 platform.
+Sample Salesforce contact manager app built on the [Aerobatic](http://www.aerobatic.io) HTML5 platform. You can see the app live at https://sfcontacts.aerobaticapp.com
 
-You can see the app live at https://sfcontacts.aerobaticapp.com
-
-## Clone your own Version
-If you want to clone your own version of this app to play around with and extend, here's the steps to follow:
+## Fork your own version
+If you want to fork your own version of this app to play around with and extend, here's the steps to follow:
 
 1. Sign-in to Aerobatic at https://aerobaticapp.com/auth/github
 2. Click the `Create New App` button
-3. Create a name for your app, something other than "sfcontacts"
-4. Rather than clone the aerobatic-starter app, clone this repo.
+3. Enter a name for your app
+4. Rather than clone the aerobatic-starter app, clone this repo. Alternatively you could fork it on GitHub then pull down your forked version.
 ```
-git clone
+git clone https://github.com/aerobatic/sfcontacts.git
 ```
-5. Run `npm install & bower install`
+5. Create the `.aerobatic` file as instructed.
+6. Save the app.
+7. Now login to Salesforce and create a new connected app. This [link](https://na17.salesforce.com/app/mgmt/forceconnectedapps/forceAppEdit.apexp) will take you straight there.
+8. Check the __Enable OAuth Settings__ box
+9. In the __Callback URL__ box enter `https://<your_app>.aerobaticapp.com/auth/callback` where `your_app` is the name you provided in step 3.
+10. Add __Access and manage your data (api)__ to the list of selected scopes
+11. In the __Start URL__ enter `https://<your_app>.aerobaticapp.com`.
+12. Enter the other require fields and click Save.
+13. On the following screen copy down the __Consumer Key__ and __Consumer Secret__.
+14. Open a terminal and `cd` to the directory where you cloned the repository.
+15. Run `npm install & bower install`. This assume you have node installed. Once node is installed you can run `npm install -g bower`.
+16. Run `grunt sim --open` to launch your app in simulator mode and play around in the code.
+17. When you're ready to push your changes to production, stop the simulator and run `grunt deploy --cowboy`.
 
-
-/* http://docs.nodejitsu.com/articles/HTTP/servers/how-to-create-a-HTTPS-server*/
+## Running Tests
+At a commannd run: `grunt test`
