@@ -17,7 +17,7 @@ angular.module('whowantstohack').config(function ($locationProvider, $sceDelegat
 
   $routeProvider.when('/', {
       templateUrl: window.__config__.cdnUrl + '/partials/home.html',
-      controller: 'MainCtrl'
+      controller: 'HomeCtrl'
     })
     .when('/events/:eventId', {
       templateUrl: window.__config__.cdnUrl + '/partials/event.html',
@@ -32,4 +32,16 @@ angular.module('whowantstohack').config(function ($locationProvider, $sceDelegat
     'self',
     'http://' + window.__config__.cdnHost + '/**'
   ]);
+});
+
+angular.module('whowantstohack').run(function($rootScope, $location, aerobatic) {
+  // Preserve the querystring during HTML5 view navigations
+  if (aerobatic.simulator === true) {
+    var originalQuery = _.clone($location.search());
+    $rootScope.$on('$routeChangeStart', function() {
+      _.each(_.keys(originalQuery), function(key) {
+        $location.search(key, originalQuery[key]);
+      });
+    });
+  }
 });

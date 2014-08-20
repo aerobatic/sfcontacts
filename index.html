@@ -24,7 +24,7 @@
     <link data-aero-build="debug" type="text/css" rel="Stylesheet" href="css/bootstrap-spacelab.css">
     <link data-aero-build="debug" type="text/css" rel="Stylesheet" href="css/styles.css">
   </head>
-  <body ng-app="whowantstohack", ng-controller="MainCtrl">
+  <body ng-app="whowantstohack" ng-controller="MainCtrl">
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -38,7 +38,7 @@
         <div class="navbar-collapse collapse" id="navbar-main">
           <ul class="nav navbar-nav navbar-right" ng-cloak>
             <li><a href="#">{{aerobatic.user.displayName}}</a></li>
-            <li><a href="{{aerobatic.logoutUrl}}">Logout</a></li>
+            <li><a ng-href="{{aerobatic.logoutUrl}}" target="_self">Logout</a></li>
           </ul>
         </div>
       </div>
@@ -64,6 +64,7 @@
     <div data-aero-build="debug">
       <script src="js/app.js"></script>
       <script src="js/controllers/mainCtrl.js"></script>
+      <script src="js/controllers/homeCtrl.js"></script>
       <script src="js/controllers/eventCtrl.js"></script>
       <script src="js/controllers/eventModalCtrl.js"></script>
       <script src="js/controllers/projectModalCtrl.js"></script>

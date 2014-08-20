@@ -27,13 +27,11 @@
       <div class="container">
         <div class="row">
           <div class="signin panel panel-default">
-            <div class="alert alert-danger" role="alert" ng-show="sessionTimeout">Session timed out. Please login again.</div>
+            <div class="alert alert-danger" role="alert" ng-cloak ng-show="sessionTimeout">Session timed out. Please login again.</div>
+            <img class="logo" asset-src="images/iconmonstr-wrench-20-icon.png" />
             <h1>whowantstohack?</h1>
-            <h4>Pitch an idea.</h4>
-            <h4>Form a team.</h4>
-            <h4>Share what you build.</h4>
-            </p>
-            <a href="{{aerobatic.authUrl}}" class="btn btn-default btn-lg btn-block">
+            <h4>Pitch an idea. Form a team. Share what you build.</h4>
+            <a href="{{aerobatic.authUrl}}" target="_self" class="btn btn-default btn-lg btn-block">
               <i class="fa fa-github fa-2x"></i>
               <span>Sign In with GitHub</span>
             </a>
@@ -50,6 +48,7 @@
     </div>
 
     <!-- 3rd party scripts -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-route.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-animate.min.js"></script>

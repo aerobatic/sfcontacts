@@ -18,6 +18,11 @@ div.signin {
   padding: 15px;
   margin: 0 auto;
   background-color: #FFF;
+  text-align: center;
+}
+
+div.signin img.logo {
+  width: 125px;
 }
 
 div.signin h2 {
