@@ -56,13 +56,6 @@ module.exports = function(grunt) {
         port: 3000
       }
     },
-    favicons: {
-     icons: {
-        src: 'favicon.png',
-        dest: 'favicons/',
-        html: 'favicons.html',
-      }
-    },
     karma: {
       options: {
         files: [
@@ -102,6 +95,5 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-ng-annotate');
-  grunt.loadNpmTasks('grunt-favicons');
   grunt.loadNpmTasks('grunt-karma');
 };

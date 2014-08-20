@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-angular.module('controllers').controller('MainCtrl', function($scope, $log, aerobatic) {
-  'use strict';
-
-  $scope.aerobatic = aerobatic;
-=======
 // Inject the Salesforce and Aerobatic services into our controller
 angular.module('controllers').controller('MainCtrl', function($scope, $log, $modal, aerobatic, Salesforce) {
   'use strict';
@@ -83,5 +77,4 @@ Salesforce.loadContacts().then(function(data) {
     }
     $scope.contactRows = contactRows;
   }
->>>>>>> parent of 6279ea3... Initial commit
 });
