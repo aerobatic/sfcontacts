@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 hidden-sm hidden-xs"><span class="h2">{{hackEvent.name}}</span></div>
+    <div class="clearfix visible-sm-block visible-xs-block"></div>
+    <div class="col-md-6">
+      <div class="pull-right">
+        <button class="btn btn-default" ng-click="openProjectModal({ phase: 'Idea' })"><i class="fa fa-lightbulb-o"></i>&nbsp;&nbsp;Submit an Idea</button>
+      </div>
+    </div>
+  </div>
+
+  <h3>Ideas</h3>
+  <div class="row">
+    <div ng-repeat="project in projects | filter:{phase: 'Idea'} | orderBy:starCount(project):reverse" class="col-md-6 col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <div class="row">
+            <div class="col-md-9">
+              <h3 class="project-title">{{project.title}}</h3>
+            </div>
+            <div class="col-md-3">
+              <div class="pull-right">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-info" ng-click="starProject(project)">
+                    <i ng-class="isStarred(project) ? 'fa-star' : 'fa-star-o'" class="fa fa-lg"></i>&nbsp;Star
+                  </button>
+                  <!-- <button type="button" class="btn btn-info" tooltip-html-unsafe="asfasgdfag" tooltip-trigger="click">{{starCount(project)}}</button> -->
+                  <a href="#" class="btn btn-info">{{starCount(project)}}</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p>Submitted By: @{{project.originator}}
+          <p>{{project.description}}</p>
+          <p><span ng-repeat="hashtag in project.hashtags">{{hashtag}}</span>
+          <div ng-show="starCount(project) > 0">
+            <hr>
+            <h4>Starred By</h4>
+            <div>{{usersWhoStarred(project)}}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

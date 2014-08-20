@@ -1,80 +1,60 @@
-// Inject the Salesforce and Aerobatic services into our controller
-angular.module('controllers').controller('MainCtrl', function($scope, $log, $modal, aerobatic, Salesforce) {
+angular.module('controllers').controller('MainCtrl', function($scope, $log, $location, $modal, $firebase, aerobatic, GitHub) {
   'use strict';
 
   $scope.aerobatic = aerobatic;
+  var ref = new Firebase(aerobatic.settings.FIREBASE_URL + '/events');
+  var sync = $firebase(ref);
 
-var contacts;
-$scope.contactsLoading = true;
-$scope.filterText = '';
+  // var cachedUsers = {};
+  // function ensureGitHubUserInFirebase() {
+  //   var usersRef = new Firebase(aerobatic.settings.FIREBASE_URL + '/users/' + aerobatic.user.id);
+  //   var userSync = $firebase(usersRef);
+  //   $scope.user = userSync.$asObject();
+  //   $scope.user.$loaded(function(data) {
+  //     if (_.isUndefined(data.username)) {
+  //       $log.info("Adding GitHub user " + aerobatic.user.id + " to Firebase.");
+  //       userSync.$set(aerobatic.user);
+  //     }
+  //     else {
+  //       $log.info("GitHub user " + aerobatic.user.id + " is already in Firebase");
+  //       // TODO: Check if the users attributes have changed like their username, avatar, etc. and save.
+  //     }
+  //   });
+  // }
 
-Salesforce.loadContacts().then(function(data) {
-  $log.info("Salesforce returned " + data.records.length + " contacts");
-  $scope.contactsLoading = false;
-  contacts = data.records;
-  divideIntoRows(contacts);
-}, function(data) {
-  $scope.contactsLoading = false;
-  // TODO: Show an error message in the view
-  $log.error(data);
-});
+  $scope.eventsLoading = true;
+  // create a synchronized array for use in our HTML code
+  $scope.events = sync.$asArray();
 
-  $scope.filterChange = function() {
-    $log.info("Filtering on " + $scope.filterText);
-    var filtered = _.filter(contacts, function(contact) {
-      var fieldsToSearch = ['FirstName', 'LastName'];
-      var textToMatch = $scope.filterText.toLowerCase();
-
-      return _.any(fieldsToSearch, function(field) {
-        return _.isString(contact[field]) && contact[field].toLowerCase().indexOf(textToMatch) !== -1;
-      });
-    });
-
-    if (filtered.length === 0) {
-      $scope.noMatchingContacts = true;
-      $scope.contactRows = [];
-      return;
+  $scope.events.$loaded(
+    function(data) {
+      $scope.eventsLoading = false;
+      $log.info("Events loaded");
+    },
+    function(err) {
+      $scope.eventsLoading = false;
+      $log.error(err);
     }
+  );
 
-    delete $scope.noMatchingContacts;
-    divideIntoRows(filtered);
+  $scope.navigateToEvent = function(eventId) {
+    $log.debug("Load event " + eventId);
+    $location.path('/events/' + eventId);
   };
 
-  $scope.openContactModal = function(contact) {
+  $scope.openEventModal = function(hackEvent) {
     var modalInstance = $modal.open({
-      templateUrl: aerobatic.cdnUrl + '/partials/contactModal.html',
-      controller: 'ContactModalCtrl',
-      size: 'lg',
+      templateUrl: aerobatic.cdnUrl + '/partials/eventModal.html',
+      controller: 'EventModalCtrl',
       resolve: {
-        contact: function () {
-          return contact;
+        hackEvent: function () {
+          return hackEvent;
         }
       }
     });
 
-    modalInstance.result.then(function(savedContact) {
-      // If we are updating an existing contact, remove it from
-      // the array.
-      if (contact)
-        contacts = _.reject(contacts, {Id: contact.Id});
-
-      // Put the new contact in the first slot which matches
-      // how the Salesforce list contacts API works
-      contacts.unshift(savedContact);
-      divideIntoRows(contacts);
+    modalInstance.result.then(function(hackEvent) {
+      $scope.events.$add(hackEvent);
     });
   };
-
-  // Divide our list of contact records into rows of 3 to work well with
-  // the Bootstrap grid.
-  function divideIntoRows(contactList) {
-    var contactRows = [[]];
-    for (var i=0; i<contactList.length; i++) {
-      if (contactRows[contactRows.length - 1].length === 3)
-        contactRows.push([contactList[i]]);
-      else
-        contactRows[contactRows.length- 1].push(contactList[i]);
-    }
-    $scope.contactRows = contactRows;
-  }
 });

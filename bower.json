@@ -1,15 +1,12 @@
 {
-  "name": "sfcontacts",
-  "version": "1.0.0",
-  "homepage": "https://github.com/aerobatic/sfcontacts",
+  "name": "whowantstohack",
+  "version": "0.0.1",
+  "homepage": "https://github.com/aerobatic/whowantstohack",
   "authors": [
     "David Von Lehman <david@aerobatic.io>"
   ],
-  "description": "Aerobatic Salesforce sample app",
+  "description": "A portal for hackfests",
   "main": "index.html",
-  "keywords": [
-    "salesforce"
-  ],
   "license": "MIT",
   "dependencies": {
     "angular-ui-bootstrap-bower": "~0.11.0",
