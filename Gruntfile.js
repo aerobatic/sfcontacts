@@ -14,9 +14,17 @@ module.exports = function(grunt) {
         }
       }
     },
+    copy: {
+      components: {
+        src: ['bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js'],
+        dest: 'dist/',
+        expand: true,
+        flatten: true
+      }
+    },
     cssmin: {
       minify: {
-        src: ['css/bootstrap-spacelab.css', 'css/styles.css'],
+        src: ['css/bootstrap-flatly.css', 'css/styles.css'],
         dest: 'dist/app.min.css'
       }
     },
@@ -39,12 +47,12 @@ module.exports = function(grunt) {
     clean: ['tmp'],
     aerobatic: {
       deploy: {
-        src: ['*.html', 'dist/*.*', 'favicons/*', 'partials/*.html', 'images/*.*', 'bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js'],
+        src: ['index.html', 'login.html', 'dist/*.*', 'favicons/*', 'partials/*.html', 'images/*.*'],
       },
       sim: {
         index: 'index.html',
         login: 'login.html',
-        protocol: 'http',
+        protocol: 'https',
         port: 3000
       }
     },
@@ -80,10 +88,10 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('sim', ['aerobatic:sim:sync', 'watch']);
+  grunt.registerTask('sim', ['build', 'aerobatic:sim:sync', 'watch']);
   grunt.registerTask('deploy', ['build', 'aerobatic:deploy']);
 
-  grunt.registerTask('build', ['jshint', 'cssmin', 'ngAnnotate', 'uglify', 'clean']);
+  grunt.registerTask('build', ['jshint', 'copy', 'cssmin', 'ngAnnotate', 'uglify', 'clean']);
   grunt.registerTask('test', ['karma']);
 
   grunt.loadNpmTasks('grunt-aerobatic');

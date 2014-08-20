@@ -53,6 +53,32 @@ div.loading  h2 {
   margin: 10px 0 0 0;
 }
 
+#filterForm input[type=text]{
+  width: 180px;
+  display: inline-block;
+  float: left;
+}
+
+#filterForm button {
+  display: inline-block;
+  margin-right: 10px;
+  float: left;
+}
+
+.panel.contact {
+  padding: 12px
+}
+
+.panel.contact h3 {
+  margin: 0 0 10px 0;
+}
+
+
+.panel.contact .fa-user {
+  font-size: 90px;
+  color: silver;
+}
+
 /* Add margin above rows in modal forms */
 form .modal-body .row:not(:first-child){
   margin-top: 15px;
@@ -61,15 +87,3 @@ form .modal-body .row:not(:first-child){
 .modal-footer .fa-spinner {
   margin-right: 10px;
 }
-
-.event-row {
-  cursor: pointer;
-}
-
-.panel-body h3.project-title {
-  margin-top: 0;
-}
-
-/*.project-panel {
-  float: left;
-}*/

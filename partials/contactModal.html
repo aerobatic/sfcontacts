@@ -1,0 +1,55 @@
+<div>
+  <div class="modal-header">
+    <h3 class="modal-title" ng-hide="contact.Id">Create New Contact</h3>
+    <h3 class="modal-title" ng-show="contact.Id">Edit Contact</h3>
+  </div>
+  <form class="form-horizontal" ng-submit="saveContact($event)">
+    <div class="modal-body">
+      <!-- Used to display errors returned by the API. -->
+      <div class="alert alert-danger" role="alert" ng-show="errors">
+        <ul>
+          <li ng-repeat="error in errors">{{error}}</li>
+        </ul>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <label for="firstName">First Name</label>
+          <input type="text" class="form-control" name="firstName" ng-model="contact.FirstName" autocomplete="off">
+        </div>
+        <div class="col-md-6">
+          <label for="lastName">Last Name</label>
+          <input type="text" class="form-control" name="lastName" ng-model="contact.LastName" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <label for="title">Title</label>
+          <input type="text" class="form-control" name="title" ng-model="contact.Title" autocomplete="off">
+        </div>
+        <div class="col-md-6">
+          <label for="department">Department</label>
+          <input type="text" class="form-control" name="department" ng-model="contact.Department" autocomplete="off">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-6">
+          <label for="title">Phone</label>
+          <input type="text" class="form-control" name="phone" ng-model="contact.Phone" autocomplete="off">
+        </div>
+
+        <div class="col-md-6">
+          <label for="department">Email</label>
+          <input type="text" class="form-control" name="email" ng-model="contact.Email" autocomplete="off">
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <i class="fa fa-spinner fa-spin fa-2x" ng-show="contactSaving"></i>
+      <button class="btn btn-primary" type="submit" ng-disabled="contactSaving">Save Contact</button>
+      <button class="btn btn-warning" type="button" ng-click="modalInstance.dismiss('cancel')">Cancel</button>
+    </div>
+  </form>
+</div>

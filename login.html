@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>whowantstohack? - an Aerobatic app</title>
+    <title>Aerobatic Salesforce Contacts</title>
 
     <link rel="apple-touch-icon-precomposed" sizes="152x152" href="favicons/apple-touch-icon-152x152-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="120x120" href="favicons/apple-touch-icon-120x120-precomposed.png">
@@ -18,15 +18,16 @@
     <link data-aero-build="release" type="text/css" rel="Stylesheet" href="dist/app.min.css">
 
     <!-- Use individual stylesheets in debug mode -->
-    <link data-aero-build="debug" type="text/css" rel="Stylesheet" href="css/bootstrap-spacelab.css">
+    <link data-aero-build="debug" type="text/css" rel="Stylesheet" href="css/bootstrap-flatly.css">
     <link data-aero-build="debug" type="text/css" rel="Stylesheet" href="css/styles.css">
   </head>
   <body>
-    <div ng-app="whowantstohack" ng-controller="LoginCtrl">
+    <div ng-app="sfContacts" ng-controller="LoginCtrl">
 
       <div class="container">
         <div class="row">
           <div class="signin panel panel-default">
+<<<<<<< HEAD
             <div class="alert alert-danger" role="alert" ng-cloak ng-show="sessionTimeout">Session timed out. Please login again.</div>
             <img class="logo" asset-src="images/iconmonstr-wrench-20-icon.png" />
             <h1>whowantstohack?</h1>
@@ -37,10 +38,19 @@
             </a>
             <div class="panel powered-by">
               <h4>Hosted on Aerobatic, the cloud for front-end devs.</h4>
+=======
+            <div class="alert alert-danger" role="alert" ng-show="sessionTimeout">Session timed out. Please login again.</div>
+            <h2>Aerobatic Contacts App</h2>
+            <a href="{{aerobatic.authUrl}}" class="btn btn-primary btn-lg btn-block">Sign In with Salesforce</a>
+
+            <div class="powered-by">
+              <h4>Powered By:</h4>
+>>>>>>> parent of 6279ea3... Initial commit
               <a href="http://www.aerobatic.io"><img class="img-responsive" asset-src="images/aerobatic-logo.png" alt="Aerobatic"></a>
             </div>
 
-            <a href="https://github.com/aerobatic/whowantstohack">Get the code on GitHub</a>
+            <a class="btn btn-default btn-block" href="https://github.com/aerobatic/sfcontacts">
+              <i class="fa fa-github fa-lg"></i>&nbsp;&nbsp;<span>Fork on GitHub</span>
             </a>
           </div>
         </div>
@@ -50,21 +60,19 @@
     <!-- 3rd party scripts -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-route.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-animate.min.js"></script>
-    <script src="https://cdn.firebase.com/js/client/1.0.19/firebase.js"></script>
-    <script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
-    <script src="bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js"></script>
 
     <!-- Consolidated release script which will be stripped from debug builds  -->
     <div data-aero-build="release">
+      <script src="dist/ui-bootstrap-tpls.min.js"></script>
       <script src="dist/app.min.js"></script>
     </div>
 
     <!-- Individual scripts for debug build -->
     <div data-aero-build="debug">
+      <script src="bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
       <script src="js/app.js"></script>
       <script src="js/controllers/loginCtrl.js"></script>
+      <script src="js/services/salesforce.js"></script>
       <script src="js/directives/assetSrc.js"></script>
     </div>
   </body>

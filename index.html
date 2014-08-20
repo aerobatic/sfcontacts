@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>whowantstohack? - an Aerobatic app</title>
+    <title>Aerobatic Salesforce Contacts</title>
 
     <!-- Using the compiled css for both debug and release since it is compiled stylus -->
   	<link rel="apple-touch-icon-precomposed" sizes="152x152" href="favicons/apple-touch-icon-152x152-precomposed.png">
@@ -21,14 +21,18 @@
     <link data-aero-build="release" type="text/css" rel="Stylesheet" href="dist/app.min.css">
 
     <!-- Use individual stylesheets in debug mode -->
-    <link data-aero-build="debug" type="text/css" rel="Stylesheet" href="css/bootstrap-spacelab.css">
+    <link data-aero-build="debug" type="text/css" rel="Stylesheet" href="css/bootstrap-flatly.css">
     <link data-aero-build="debug" type="text/css" rel="Stylesheet" href="css/styles.css">
   </head>
+<<<<<<< HEAD
   <body ng-app="whowantstohack" ng-controller="MainCtrl">
+=======
+  <body ng-app="sfContacts", ng-controller="MainCtrl">
+>>>>>>> parent of 6279ea3... Initial commit
     <div class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
-          <a href="/" class="navbar-brand">whowantstohack?</a>
+          <a href="#" class="navbar-brand">Aerobatic Contacts Manager</a>
           <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
@@ -44,31 +48,85 @@
       </div>
     </div>
 
-    <div ng-view></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 hidden-sm hidden-xs"><span class="h2">My Contacts</span></div>
+        <div class="clearfix visible-sm-block visible-xs-block"></div>
+        <div class="col-md-6">
+          <form class="form-inline pull-right" id="filterForm" ng-hide="contactsLoading">
+            <button class="btn btn-default" ng-click="openContactModal()"><i class="fa fa-user"></i>&nbsp;&nbsp;New Contact</button>
+            <input type="text" class="form-control" placeholder="Filter Contacts" ng-model="filterText" ng-change="filterChange()" />
+          </form>
+        </div>
+      </div>
+
+      <div class="loading panel panel-default" ng-show="contactsLoading">
+        <div class="row">
+          <div class="col-md-4">
+            <i class="fa fa-spinner fa-spin"></i>
+          </div>
+          <div class="col-md-8">
+            <h2>Contacts Loading</h2>
+          </div>
+        </div>
+      </div>
+
+      <h3 ng-show="noMatchingContacts">No Matching Contacts</h3>
+
+      <div class="row" ng-repeat="row in contactRows" ng-hide="contactsLoading">
+        <div class="col-md-4" ng-repeat="contact in row">
+          <div class="panel panel-default contact">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="user">
+                  <i class="fa fa-user"></i>
+                </div>
+              </div>
+              <div class="col-md-8">
+                <h3>{{contact.FirstName}} {{contact.LastName}}</h3>
+                <div ng-show="contact.Title">{{contact.Title}}</div>
+                <div ng-show="contact.Phone">{{contact.Phone}}</div>
+                <div ng-show="contact.Email">{{contact.Email}}</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="btn-group pull-right">
+                  <button type="button" title="Edit" class="btn btn-default btn-xs" ng-click="openContactModal(contact)"><i class="fa fa-pencil-square-o"></i></button>
+                  <button type="button" title="Delete" class="btn btn-default btn-xs"><i class="fa fa-eraser"></i></button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- 3rd party scripts -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-route.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-animate.min.js"></script>
-    <script src="https://cdn.firebase.com/js/client/1.0.19/firebase.js"></script>
-    <script src="https://cdn.firebase.com/libs/angularfire/0.8.0/angularfire.min.js"></script>
-    <script src="bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js"></script>
 
     <!-- Consolidated release script which will be stripped from debug builds  -->
     <div data-aero-build="release">
+      <script src="dist/ui-bootstrap-tpls.min.js"></script>
       <script src="dist/app.min.js"></script>
     </div>
 
     <!-- Individual scripts for debug build -->
     <div data-aero-build="debug">
+      <script src="bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.js"></script>
       <script src="js/app.js"></script>
       <script src="js/controllers/mainCtrl.js"></script>
+<<<<<<< HEAD
       <script src="js/controllers/homeCtrl.js"></script>
       <script src="js/controllers/eventCtrl.js"></script>
       <script src="js/controllers/eventModalCtrl.js"></script>
       <script src="js/controllers/projectModalCtrl.js"></script>
       <script src="js/services/github.js"></script>
+=======
+      <script src="js/controllers/contactModalCtrl.js"></script>
+      <script src="js/services/salesforce.js"></script>
+>>>>>>> parent of 6279ea3... Initial commit
     </div>
   </body>
 </html>
