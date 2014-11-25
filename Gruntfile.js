@@ -5,57 +5,47 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
 
     jshint: {
-      all: ['Gruntfile.js', 'js/**/*.js', 'test/**/*.js']
+      all: ['Gruntfile.js', 'app/js/**/*.js', 'test/**/*.js']
     },
     uglify: {
+      options: {
+        beautify: true
+      },
       build: {
         files: {
-          'dist/app.min.js': ['tmp/annotated.js']
+          'dist/app.min.js': [
+            'node_modules/angular-bootstrap/ui-bootstrap.js', 
+            'node_modules/angular-aerobatic/angular-aerobatic.js',
+            'tmp/annotated.js'
+          ]
         }
       }
     },
     copy: {
-      components: {
-        src: ['bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js'],
-        dest: 'dist/',
-        expand: true,
-        flatten: true
+      dist: {
+        files: [
+          {src: 'app/index.html', dest: 'dist/index.html'},
+          {src: 'app/login.html', dest: 'dist/login.html'},
+          {src: 'app/favicon.png', dest: 'dist/favicon.png'},
+          {expand: true, cwd:'app', src: ['partials/**'], dest: 'dist/'},
+          {expand: true, cwd:'app', src: ['images/**'], dest: 'dist/'}
+        ]
       }
     },
     cssmin: {
       minify: {
-        src: ['css/bootstrap-flatly.css', 'css/styles.css'],
+        src: ['app/css/bootstrap-flatly.css', 'app/css/styles.css'],
         dest: 'dist/app.min.css'
-      }
-    },
-    watch: {
-      options: {
-        livereload: true,
-        spawn: true
-      },
-      all: {
-        files: ['index.html', 'login.html', 'js/**/*.js','partials/*.html', 'css/*.css']
       }
     },
     ngAnnotate: {
       target: {
         files: {
-          'tmp/annotated.js': ['js/**/*.js']
+          'tmp/annotated.js': ['app/js/**/*.js']
         }
       }
     },
     clean: ['tmp'],
-    aerobatic: {
-      deploy: {
-        src: ['index.html', 'login.html', 'dist/*.*', 'favicons/*', 'partials/*.html', 'images/*.*'],
-      },
-      sim: {
-        index: 'index.html',
-        login: 'login.html',
-        protocol: 'https',
-        port: 3000
-      }
-    },
     karma: {
       options: {
         files: [
@@ -63,15 +53,14 @@ module.exports = function(grunt) {
           'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.10/angular.min.js',
           'http://ajax.googleapis.com/ajax/libs/angularjs/1.2.9/angular-mocks.js',
           'test/fixtures.js',
-          'js/**/*.js',
+          'app/js/**/*.js',
           'test/spec/**/*.js'
         ],
         frameworks: ['jasmine'],
         browsers: ['Chrome'],
         logLevel: 'INFO',
         plugins : [
-          'karma-jasmine',
-          'karma-chrome-launcher'
+          'karma-jasmine'
         ],
         reporters: 'dots'
       },
@@ -81,18 +70,13 @@ module.exports = function(grunt) {
     }
   });
 
-  grunt.registerTask('sim', ['build', 'aerobatic:sim:sync', 'watch']);
-  grunt.registerTask('deploy', ['build', 'aerobatic:deploy']);
-
   grunt.registerTask('build', ['jshint', 'copy', 'cssmin', 'ngAnnotate', 'uglify', 'clean']);
   grunt.registerTask('test', ['karma']);
 
-  grunt.loadNpmTasks('grunt-aerobatic');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-cssmin');
   grunt.loadNpmTasks('grunt-contrib-copy');
-  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-clean');
   grunt.loadNpmTasks('grunt-ng-annotate');
   grunt.loadNpmTasks('grunt-karma');

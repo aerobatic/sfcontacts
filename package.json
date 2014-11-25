@@ -31,7 +31,6 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-contrib-jshint": "^0.10.0",
     "grunt-contrib-cssmin": "^0.10.0",
-    "grunt-aerobatic": "*",
     "grunt-contrib-copy": "^0.5.0",
     "grunt-contrib-clean": "^0.5.0",
     "grunt-ng-annotate": "^0.3.0",
@@ -39,5 +38,13 @@
     "grunt-karma": "^0.8.3",
     "karma-chrome-launcher": "^0.1.4",
     "karma-jasmine": "~0.2.0"
+  },
+  "dependencies": {
+    "angular": "^1.3.4",
+    "angular-bootstrap": "^0.11.0",
+    "angular-aerobatic": "^1.0.2"
+  },
+  "_aerobatic": {
+    "appId": "ada991e6-53f5-42fe-9adc-469415028490"
   }
 }

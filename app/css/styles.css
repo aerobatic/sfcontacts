@@ -61,7 +61,8 @@ div.loading  h2 {
 }
 
 .panel.contact {
-  padding: 12px
+  padding: 12px;
+  height: 160px;
 }
 
 .panel.contact h3 {
