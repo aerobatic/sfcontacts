@@ -60,7 +60,8 @@ module.exports = function(grunt) {
         browsers: ['Chrome'],
         logLevel: 'INFO',
         plugins : [
-          'karma-jasmine'
+          'karma-jasmine',
+          'karma-chrome-launcher'
         ],
         reporters: 'dots'
       },

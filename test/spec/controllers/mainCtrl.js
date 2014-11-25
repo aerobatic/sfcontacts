@@ -28,21 +28,7 @@ describe("mainCtrl", function() {
     scope.$root.$digest();
 
     expect(salesforceMock.loadContacts).toHaveBeenCalled();
-    expect(scope.contactRows.length).toEqual(2);
-  });
-
-  it('should divide contacts up into rows', function() {
-    var numContacts = 10;
-    loadContactsDeferred.resolve({
-      records: _.map(_.range(numContacts), function(i) {
-        return { Id: i.toString() };
-      })
-    });
-
-    scope.$root.$digest();
-
-    expect(scope.contactRows.length).toEqual(4);
-    expect(_.last(scope.contactRows).length).toEqual(1);
+    expect(scope.contacts.length).toEqual(4);
   });
 
   it('should filter contacts on first name match', function() {
@@ -50,12 +36,11 @@ describe("mainCtrl", function() {
 
     scope.$root.$digest();
 
-    scope.filterText = 'Or';
-    scope.filterChange();
-
-    expect(scope.contactRows.length).toEqual(1);
-    expect(scope.contactRows[0].length).toEqual(1);
-    expect(scope.contactRows[0][0].FirstName).toEqual('Orville');
+    scope.contactFilterText = 'Or';
+    var filteredContacts = _.filter(scope.contacts, scope.contactFilter);
+    // expect(JSON.stringify(filteredContacts[0])).toEqual('34');
+    expect(filteredContacts.length, 1);
+    // expect(filteredContacts[0].FirstName).toEqual('Orville');
   });
 
   it('should filter contacts on first name match', function() {
@@ -63,10 +48,12 @@ describe("mainCtrl", function() {
 
     scope.$root.$digest();
 
-    scope.filterText = 'Wri';
-    scope.filterChange();
+    scope.contactFilterText = 'Wri';
 
-    expect(scope.contactRows[0].length).toEqual(2);
-    expect(_.map(scope.contactRows[0], 'LastName')).toEqual(['Wright', 'Wright']);
+    var filteredContacts = _.filter(scope.contacts, scope.contactFilter);
+    expect(filteredContacts.length, 2);
+
+    // expect(scope.contacts[0].length).toEqual(2);
+    // expect(_.map(scope.contacts[0], 'LastName')).toEqual(['Wright', 'Wright']);
   });
 });
